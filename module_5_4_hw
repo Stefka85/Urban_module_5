@@ -1,0 +1,38 @@
+class Example:
+    def __new__(cls, *args, **kwargs):
+        print(args)
+        print(kwargs)
+        return object.__new__(cls)
+        
+    def __init__(self, first, second, third):
+        print(first)
+        print(second)
+        print(third)
+        
+ex = Example('data', second = 25, third = 3.14)
+
+houses_History = []
+
+def __new__(cls, *args):
+    obj = super().__new__(cls)
+    house_name = args[0]
+    cls.houses_history.append(house_name)
+    return obj
+
+def __init__(self, name):
+    self.name = name
+
+def __del__(self):
+    print(f"Дом '{self.name}' снесён, но он останется в истории.")
+    
+dom1 = House('ЖК Эльбрус')
+print(House.houses_history)
+dom2 = House('ЖК Акация')
+print(House.houses_history)
+dom3 = House('ЖК Матрёшки')
+print(House.houses_history)
+
+del dom2
+del dom3
+del dom1
+print(House.houses_history)
